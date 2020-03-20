@@ -2,6 +2,11 @@ import { SET_VILLAGE } from './actions';
 
 const initialState = {
   village: [],
+  smurf: {
+    name: '',
+    age: '',
+    height: '',
+  },
 };
 
 export const reducer = (state = initialState, action) => {
