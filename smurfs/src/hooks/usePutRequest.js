@@ -3,21 +3,21 @@ import axios from 'axios';
 
 const baseURL = new URL('http://localhost:3333/smurfs');
 
-export const usePostRequest = (smurf, editSmurf) => {
+export const usePutRequest = (id, editSmurf) => {
   const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const postData = async () => {
-      axios.post(baseURL, smurf).then(response => {
+    const editData = async () => {
+      axios.put(`${baseURL}/${id}`).then(response => {
         setResponse(response.data);
       }).catch(error => {
         setError(error);
       });
     };
-    if (smurf && !editSmurf) {
-      postData();
+    if (editSmurf) {
+      editData();
     }
-  }, [smurf]);
+  }, [editSmurf, id]);
   return { response, error };
 };

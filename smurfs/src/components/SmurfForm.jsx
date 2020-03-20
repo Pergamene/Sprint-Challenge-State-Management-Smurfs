@@ -1,23 +1,33 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { usePostRequest } from '../hooks/usePostRequest';
-import { setVillage } from '../redux/actions';
+import { usePutRequest } from '../hooks/usePutRequest';
+import { setVillage, setSmurf } from '../redux/actions';
 
 const SmurfForm = () => {
   const dispatch = useDispatch();
-  const [name, setName] = useState('');
-  const [age, setAge] = useState('');
-  const [height, setHeight] = useState('');
-  const [smurf, setSmurf] = useState(null);
+  const { smurf, editSmurf } = useSelector(state => state);
+  const [name, setName] = useState(smurf.name);
+  const [age, setAge] = useState(smurf.age);
+  const [height, setHeight] = useState(smurf.height);
+  const [newSmurf, setNewSmurf] = useState(null);
 
-  const { response } = usePostRequest(smurf);
+  const postResponse = usePostRequest(newSmurf, editSmurf).response;
+  const putResponse = usePutRequest(newSmurf, editSmurf).response;
+  
 
   useEffect(() => {
-    if(smurf) {
-      dispatch(setVillage(response));
+    if(newSmurf) {
+      dispatch(setVillage(postResponse));
     }
-  }, [smurf, response, dispatch]);
+  }, [newSmurf, postResponse, dispatch]);
+
+  useEffect(() => {
+    setName(smurf.name);
+    setAge(smurf.age);
+    setHeight(smurf.height);
+  }, [smurf]);
 
   const handleNameChange = event => {
     setName(event.target.value);
@@ -33,14 +43,15 @@ const SmurfForm = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    setSmurf({
+    const smurfData = {
       name: name,
       age: age,
       height: height,
-    });
-    setName('');
-    setAge('');
-    setHeight('');
+    };
+    setNewSmurf(smurfData);
+    setName(smurf.name);
+    setAge(smurf.age);
+    setHeight(smurf.height);
   };
 
   return (
