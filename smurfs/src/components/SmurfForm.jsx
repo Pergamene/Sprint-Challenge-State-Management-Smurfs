@@ -15,6 +15,7 @@ const SmurfForm = () => {
 
   const postResponse = usePostRequest(newSmurf, editSmurf).response;
   const putResponse = usePutRequest(newSmurf, editSmurf).response;
+  console.log('PUTRESPONSE', putResponse);
   
 
   useEffect(() => {
