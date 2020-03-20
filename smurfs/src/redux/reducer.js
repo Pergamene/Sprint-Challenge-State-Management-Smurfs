@@ -13,7 +13,6 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         village: [
-          ...state.village,
           ...action.payload,
         ],
       };
