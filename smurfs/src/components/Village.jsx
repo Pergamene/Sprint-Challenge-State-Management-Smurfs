@@ -27,7 +27,12 @@ const Village = () => {
       </div>
     );
   } else {
-    return <h2>Village</h2>;
+    return (
+      <div>
+        <h2>Village</h2>
+        <SmurfForm />
+      </div>
+    );
   }
 };
 

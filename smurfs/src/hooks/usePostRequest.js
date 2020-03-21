@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const baseURL = new URL('http://localhost:3333/smurfs');
 
-export const usePostRequest = (smurf, editSmurf) => {
+export const usePostRequest = (smurf) => {
   const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);
 
@@ -15,7 +15,7 @@ export const usePostRequest = (smurf, editSmurf) => {
         setError(error);
       });
     };
-    if (smurf && !editSmurf) {
+    if (smurf) {
       postData();
     }
   }, [smurf]);
