@@ -1,29 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-
-import { useDeleteRequest } from '../hooks/useDeleteRequest';
-import { setVillage } from '../redux/actions';
+import React from 'react';
+import SmurfState from '../services/SmurfState';
 
 const Smurf = props => {
-  const dispatch = useDispatch();
-  const { name, age, height, id } = props.data;
-  const [deleteSmurf, setDeleteSmurf] = useState(false);
+  const smurf = props.smurf;
 
-  const { response } = useDeleteRequest(id, deleteSmurf);
+  const handleEdit = () => {
+    SmurfState.setEditSmurf(smurf);
+  }
 
-
-  useEffect(() => {
-    if (deleteSmurf) {
-      dispatch(setVillage(response));
-    }
-  }, [deleteSmurf, response, dispatch]);
+  const handleDelete = () => {
+    SmurfState.deleteSmurf(smurf.id);
+  }
 
   return (
     <div>
-      <h3>{name}</h3>
-      <p>{age}</p>
-      <p>{height}</p>
-      <button onClick={() => setDeleteSmurf(true)}>Delete</button>
+      <h3>{smurf.name}</h3>
+      <p>{smurf.age}</p>
+      <p>{smurf.height}</p>
+      <button onClick={handleEdit}>Edit</button>
+      <button onClick={handleDelete}>Delete</button>
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 
-import Village from './Village';
+import Village from './components/Village';
 
 class App extends Component {
   render() {
