@@ -31,7 +31,8 @@ const SmurfForm = () => {
     SmurfState.addSmurf(name, age, height);
   };
 
-  const handleEditSmurf = () => {
+  const handleEditSmurf = event => {
+    event.preventDefault();
     SmurfState.editSmurf(name, age, height);
   }
 

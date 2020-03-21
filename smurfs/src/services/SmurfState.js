@@ -2,7 +2,7 @@ import store from '../redux/store';
 import { setVillage, setEditSmurf, setSmurf } from '../redux/actions';
 
 import SmurfService from './SmurfService';
-
+// Controller
 class SmurfState {
   async fetchVillage() {
     const village = await SmurfService.fetchVillage();
@@ -32,7 +32,7 @@ class SmurfState {
 
   async editSmurf(name, age, height) {
     const state = store.getState();
-    const village = await SmurfService.setSmurf(state.smurf.id, name, age, height);
+    const village = await SmurfService.setSmurf(name, age, height, state.smurf.id);
     store.dispatch(setVillage(village));
     store.dispatch(setEditSmurf(false));
     store.dispatch(setSmurf({}));
